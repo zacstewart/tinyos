@@ -4,6 +4,11 @@
 
 extern crate core;
 use core::iter::*;
+
+extern {
+    fn outb(port: u16, data: u8);
+}
+
 const COFFEE: [char; 7] = ['c', 'o', 'f', 'f', 'e', 'e', ' '];
 
 enum Color {
@@ -32,9 +37,19 @@ fn write_cell(position: usize, character: char, background: Color, foreground: C
     }
 }
 
+fn move_cursor(position: u16) {
+    unsafe {
+        outb(0x3d4, 14);
+        outb(0x3d5, ((position >> 8) & 0x0ff) as u8);
+        outb(0x3d4, 15);
+        outb(0x3d5, (position & 0x0ff) as u8);
+    }
+}
+
 #[no_mangle]
 #[no_stack_check]
 pub extern "C" fn kmain() {
+    move_cursor(80);
     for i in range(0, 25 * 80) {
         write_cell(i, COFFEE[i % 7], Color::Brown, Color::Blue);
     }
