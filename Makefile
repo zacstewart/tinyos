@@ -1,9 +1,9 @@
 AS = nasm
 ASFLAGS = -f elf32
-CC = gcc-4.9
+CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
          -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
-LD = i386-elf-ld
+LD = ld
 LDFLAGS = -T link.ld -melf_i386
 OBJECTS = loader.o kmain.o
 QEMU = qemu-system-i386
