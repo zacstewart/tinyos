@@ -1,7 +1,11 @@
 AS = nasm
 ASFLAGS = -f elf32
+CC = gcc-4.9
+CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
+         -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
 LD = i386-elf-ld
 LDFLAGS = -T link.ld -melf_i386
+OBJECTS = loader.o kmain.o
 QEMU = qemu-system-i386
 
 all: kernel.elf
@@ -12,11 +16,14 @@ run: tinyos.iso
 clean:
 	rm -rf *.o tinyos.iso kernel.elf
 
-loader.o: loader.s
-	nasm -f elf32 loader.s
+%.o: %.c
+	$(CC) $(CFLAGS)  $< -o $@
 
-kernel.elf: loader.o
-	$(LD) $(LDFLAGS) loader.o -o kernel.elf
+%.o: %.s
+	$(AS) $(ASFLAGS) $< -o $@
+
+kernel.elf: $(OBJECTS)
+	$(LD) $(LDFLAGS) $(OBJECTS) -o kernel.elf
 
 tinyos.iso: kernel.elf
 	cp kernel.elf iso/boot/kernel.elf
