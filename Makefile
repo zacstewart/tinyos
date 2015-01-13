@@ -1,8 +1,7 @@
 AS = nasm
 ASFLAGS = -f elf32
-CC = gcc
-CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
-         -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
+RUSTC = rustc
+RUSTFLAGS = --target i686-unknown-linux-gnu -O --crate-type lib --emit obj
 LD = ld
 LDFLAGS = -T link.ld -melf_i386
 OBJECTS = loader.o kmain.o
@@ -16,11 +15,11 @@ run: tinyos.iso
 clean:
 	rm -rf *.o tinyos.iso kernel.elf
 
-%.o: %.c
-	$(CC) $(CFLAGS)  $< -o $@
-
 %.o: %.s
 	$(AS) $(ASFLAGS) $< -o $@
+
+%.o: %.rs
+	$(RUSTC) $(RUSTFLAGS) -o $@ $<
 
 kernel.elf: $(OBJECTS)
 	$(LD) $(LDFLAGS) $(OBJECTS) -o kernel.elf
