@@ -1,5 +1,10 @@
 use io;
 
+const FB_COMMAND_PORT: u16 = 0x3d4;
+const FB_DATA_PORT: u16 = 0x3d5;
+const FB_HIGH_BYTE_COMMAND: u8 = 14;
+const FB_LOW_BYTE_COMMAND: u8 = 15;
+
 pub enum Color {
     Black = 0,
     Red = 4,
@@ -28,9 +33,9 @@ pub fn write_cell(position: usize, character: char, background: Color, foregroun
 
 pub fn move_cursor(position: u16) {
     unsafe {
-        io::outb(0x3d4, 14);
-        io::outb(0x3d5, ((position >> 8) & 0x0ff) as u8);
-        io::outb(0x3d4, 15);
-        io::outb(0x3d5, (position & 0x0ff) as u8);
+        io::outb(FB_COMMAND_PORT, FB_HIGH_BYTE_COMMAND);
+        io::outb(FB_DATA_PORT, ((position >> 8) & 0x0ff) as u8);
+        io::outb(FB_COMMAND_PORT, FB_LOW_BYTE_COMMAND);
+        io::outb(FB_DATA_PORT, (position & 0x0ff) as u8);
     }
 }
