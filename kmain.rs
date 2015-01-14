@@ -5,9 +5,7 @@
 extern crate core;
 use core::iter::*;
 
-extern {
-    fn outb(port: u16, data: u8);
-}
+mod io;
 
 const COFFEE: [char; 7] = ['c', 'o', 'f', 'f', 'e', 'e', ' '];
 
@@ -39,10 +37,10 @@ fn write_cell(position: usize, character: char, background: Color, foreground: C
 
 fn move_cursor(position: u16) {
     unsafe {
-        outb(0x3d4, 14);
-        outb(0x3d5, ((position >> 8) & 0x0ff) as u8);
-        outb(0x3d4, 15);
-        outb(0x3d5, (position & 0x0ff) as u8);
+        io::outb(0x3d4, 14);
+        io::outb(0x3d5, ((position >> 8) & 0x0ff) as u8);
+        io::outb(0x3d4, 15);
+        io::outb(0x3d5, (position & 0x0ff) as u8);
     }
 }
 
