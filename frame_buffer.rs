@@ -42,7 +42,7 @@ pub fn cursor_position() -> usize {
         io::outb(FB_COMMAND_PORT, FB_LOW_BYTE_COMMAND);
         low = io::inb(FB_DATA_PORT);
     }
-    ((high as usize) >> 8) | low as usize
+    ((high as usize) << 8) | low as usize
 }
 
 pub fn move_cursor(position: usize) {
