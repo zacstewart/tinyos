@@ -4,7 +4,7 @@ A tiny operating system kernel written in Rust and a tiny bit of assembly. I
 was inspired to hack on this while reading [The Little Book About OS
 Development][little book] during a 26-hour flight.
 
-![screenshot](http://cl.ly/image/2f0O142u092F/Screen%20Shot%202015-01-28%20at%2010.30.55%20PM.png)
+![screenshot](http://cl.ly/image/2a0a2e0J2s0F/Screen%20Shot%202015-02-01%20at%2011.33.31%20AM.png)
 
 ## Build it
 
