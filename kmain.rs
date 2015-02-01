@@ -14,7 +14,7 @@ pub extern "C" fn kmain() {
     frame_buffer::move_cursor(0);
     let ref bg = frame_buffer::Color::Brown;
     let ref fg = frame_buffer::Color::Blue;
-    for i in range(0, 285) {
+    for _ in (0..285) {
         frame_buffer::write("coffee ", bg, fg);
     }
 }
