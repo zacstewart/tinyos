@@ -33,25 +33,19 @@ pub fn write_cell(position: usize, character: u8, background: Color, foreground:
 }
 
 pub fn cursor_position() -> usize {
-    let high: u8;
-    let low: u8;
+    io::outb(FB_COMMAND_PORT, FB_HIGH_BYTE_COMMAND);
+    let high = io::inb(FB_DATA_PORT);
+    io::outb(FB_COMMAND_PORT, FB_LOW_BYTE_COMMAND);
+    let low = io::inb(FB_DATA_PORT);
 
-    unsafe {
-        io::outb(FB_COMMAND_PORT, FB_HIGH_BYTE_COMMAND);
-        high = io::inb(FB_DATA_PORT);
-        io::outb(FB_COMMAND_PORT, FB_LOW_BYTE_COMMAND);
-        low = io::inb(FB_DATA_PORT);
-    }
     ((high as usize) << 8) | low as usize
 }
 
 pub fn move_cursor(position: usize) {
-    unsafe {
-        io::outb(FB_COMMAND_PORT, FB_HIGH_BYTE_COMMAND);
-        io::outb(FB_DATA_PORT, ((position >> 8) & 0x0ff) as u8);
-        io::outb(FB_COMMAND_PORT, FB_LOW_BYTE_COMMAND);
-        io::outb(FB_DATA_PORT, (position & 0x0ff) as u8);
-    }
+    io::outb(FB_COMMAND_PORT, FB_HIGH_BYTE_COMMAND);
+    io::outb(FB_DATA_PORT, ((position >> 8) & 0x0ff) as u8);
+    io::outb(FB_COMMAND_PORT, FB_LOW_BYTE_COMMAND);
+    io::outb(FB_DATA_PORT, (position & 0x0ff) as u8);
 }
 
 pub fn write(text: &str, background: &Color, foreground: &Color) {
