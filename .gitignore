@@ -2,3 +2,4 @@
 *.elf
 *.iso
 .vagrant
+log.txt

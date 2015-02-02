@@ -10,7 +10,7 @@ QEMU = qemu-system-i386
 all: kernel.elf
 
 run: tinyos.iso
-	$(QEMU) -cdrom tinyos.iso -monitor stdio
+	$(QEMU) -cdrom tinyos.iso -monitor stdio -serial file:"log.txt"
 
 clean:
 	rm -rf *.o tinyos.iso kernel.elf
