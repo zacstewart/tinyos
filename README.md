@@ -6,6 +6,11 @@ Development][little book] during a 26-hour flight.
 
 ![screenshot](http://cl.ly/image/2a0a2e0J2s0F/Screen%20Shot%202015-02-01%20at%2011.33.31%20AM.png)
 
+## Features
+
+* Frame buffer (screen) text output
+* Serial port text output (for debugging)
+
 ## Build it
 
 I build this inside a Vagrant instance:
