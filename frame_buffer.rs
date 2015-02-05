@@ -1,4 +1,5 @@
 use io;
+use core::marker::Copy;
 use core::str::StrExt;
 
 const FB_COMMAND_PORT: u16 = 0x3d4;
@@ -25,6 +26,8 @@ pub enum Color {
     White = 15
 }
 
+impl Copy for Color {}
+
 pub fn write_cell(position: usize, character: u8, background: Color, foreground: Color) {
     unsafe {
         *((0xb8000 + position * 2) as *mut u8) = character;
@@ -48,10 +51,10 @@ pub fn move_cursor(position: usize) {
     io::outb(FB_DATA_PORT, (position & 0x0ff) as u8);
 }
 
-pub fn write(text: &str, background: &Color, foreground: &Color) {
+pub fn write(text: &str, background: Color, foreground: Color) {
     let mut position = cursor_position();
     for b in StrExt::bytes(text) {
-        write_cell(position, b, Color::Brown, Color::Blue);
+        write_cell(position, b, background, foreground);
         position += 1;
         move_cursor(position);
     }
