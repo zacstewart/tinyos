@@ -1,8 +1,8 @@
 AS = nasm
 ASFLAGS = -f elf32
 RUSTC = rustc
-RUSTFLAGS = -L $(HOME)/.multirust/toolchains/my-rust/lib/rustlib/i686-unknown-linux-gnu/lib/ --target i686-unknown-linux-gnu -O --crate-type lib --emit obj
 LD = ld
+RUSTFLAGS = -L rustlib --target i686-unknown-linux-gnu -O --crate-type lib --emit obj
 LDFLAGS = -T link.ld -melf_i386
 OBJECTS = loader.o io.o kmain.o
 QEMU = qemu-system-i386
