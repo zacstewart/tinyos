@@ -1,5 +1,6 @@
 #![crate_name = "kmain"]
 #![crate_type = "dylib"]
+#![feature(no_std, core)]
 #![no_std]
 
 extern crate core;
