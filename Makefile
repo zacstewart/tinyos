@@ -1,8 +1,8 @@
 AS = nasm
 ASFLAGS = -f elf32
 RUSTC = rustc
-LD = ld
 RUSTFLAGS = -L rustlib --target i686-unknown-linux-gnu -O --crate-type lib --emit obj
+LD = i386-elf-ld
 LDFLAGS = -T link.ld -melf_i386
 OBJECTS = loader.o io.o kmain.o
 QEMU = qemu-system-i386

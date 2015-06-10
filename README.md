@@ -11,15 +11,24 @@ Development][little book] during a 26-hour flight.
 * Frame buffer (screen) text output
 * Serial port text output (for debugging)
 
-## Build it
+## Build Requirements
 
-I build this inside a Vagrant instance:
+I'm currently only building this on Mac OS X, but previously I built it in a
+Vagrant instance running Ubuntu. Using the `ld` provided by the system, you
+should be able to as well.  Just install the following packages using `apt` or
+your package manager, and update the _Makefile_ to point to your `ld`.
+
+* NASM (`brew install nasm`)
+* Qemu (`brew install qeumu`)
+* GNU Binutils built for i386 ELF format
+
+        $ wget 'ftp://sourceware.org/pub/binutils/snapshots/binutils.tar.bz2'
+        $ ./configure --target=i386-elf --program-prefix=i386-elf-
+        $ make && make install
+
+# Build
 
 ```sh
-$ vagrant init hashicorp/precise32
-$ vagrant up
-$ vagratn ssh
-$ cd /vagrant
 $ make clean all
 ```
 
@@ -30,3 +39,4 @@ $ make run
 ```
 
 [little book]: http://littleosbook.github.io/
+[binutils]: http://www.gnu.org/software/binutils/
