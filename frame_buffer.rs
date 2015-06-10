@@ -1,5 +1,6 @@
 use io;
 use core::marker::Copy;
+use core::clone::Clone;
 use core::str::StrExt;
 
 const FB_COMMAND_PORT: u16 = 0x3d4;
@@ -27,6 +28,11 @@ pub enum Color {
 }
 
 impl Copy for Color {}
+impl Clone for Color {
+    fn clone(&self) -> Color {
+        return *self;
+    }
+}
 
 pub fn write_cell(position: usize, character: u8, background: Color, foreground: Color) {
     unsafe {
