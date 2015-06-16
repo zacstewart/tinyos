@@ -4,7 +4,7 @@ RUSTC = rustc
 RUSTFLAGS = -L rustlib --target i686-unknown-linux-gnu -O --crate-type lib --emit obj
 LD = i386-elf-ld
 LDFLAGS = -T link.ld -melf_i386
-OBJECTS = loader.o io.o kmain.o
+OBJECTS = loader.o io.o kmain.o gdt.o
 QEMU = qemu-system-i386
 
 all: kernel.elf
