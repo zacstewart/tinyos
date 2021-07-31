@@ -1,7 +1,6 @@
 use io;
 use core::marker::Copy;
 use core::clone::Clone;
-use core::str::StrExt;
 
 const FB_COMMAND_PORT: u16 = 0x3d4;
 const FB_DATA_PORT: u16 = 0x3d5;
@@ -59,7 +58,7 @@ pub fn move_cursor(position: usize) {
 
 pub fn write(text: &str, background: Color, foreground: Color) {
     let mut position = cursor_position();
-    for b in StrExt::bytes(text) {
+    for b in text.bytes() {
         write_cell(position, b, background, foreground);
         position += 1;
         move_cursor(position);

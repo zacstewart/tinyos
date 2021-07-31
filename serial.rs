@@ -1,4 +1,3 @@
-use core::str::StrExt;
 use io;
 
 const COM1_BASE: u16 = 0x3f8;
@@ -80,7 +79,7 @@ impl Port {
     /// Write a string to the serial port
     pub fn write(&self, text: &str) {
 
-        for b in StrExt::bytes(text) {
+        for b in text.bytes() {
             loop {
                 match self.transmitting_fifo_empty() {
                     true => break,

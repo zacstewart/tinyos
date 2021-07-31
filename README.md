@@ -18,6 +18,7 @@ Vagrant instance running Ubuntu. Using the `ld` provided by the system, you
 should be able to as well.  Just install the following packages using `apt` or
 your package manager, and update the _Makefile_ to point to your `ld`.
 
+* Cdrtools (`brew install cdrtools`)
 * NASM (`brew install nasm`)
 * Qemu (`brew install qeumu`)
 * GNU Binutils built for i386 ELF format
