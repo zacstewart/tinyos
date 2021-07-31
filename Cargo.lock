@@ -1,0 +1,12 @@
+[root]
+name = "tinyos"
+version = "0.0.0"
+dependencies = [
+ "core-nightly 2015.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "core-nightly"
+version = "2015.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+

@@ -1,0 +1,10 @@
+[package]
+name = "tinyos"
+version = "0.0.0"
+authors = ["zgstewart@gmail.com"]
+
+[lib]
+path = "kmain.rs"
+
+[dependencies]
+core-nightly = "2015.1.7"
