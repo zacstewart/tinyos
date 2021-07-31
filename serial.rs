@@ -20,14 +20,12 @@ fn line_status_port(base: u16) -> u16 {
 }
 
 pub struct Port {
-    base: u16
+    base: u16,
 }
 
 impl Port {
     pub fn new() -> Port {
-        let port = Port {
-            base: COM1_BASE
-        };
+        let port = Port { base: COM1_BASE };
 
         port.configure_baud_rate(1);
         port.configure_line();
@@ -78,7 +76,6 @@ impl Port {
 
     /// Write a string to the serial port
     pub fn write(&self, text: &str) {
-
         for b in text.bytes() {
             loop {
                 match self.transmitting_fifo_empty() {

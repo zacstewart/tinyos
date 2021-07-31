@@ -1,6 +1,6 @@
-use io;
-use core::marker::Copy;
 use core::clone::Clone;
+use core::marker::Copy;
+use io;
 
 const FB_COMMAND_PORT: u16 = 0x3d4;
 const FB_DATA_PORT: u16 = 0x3d5;
@@ -23,7 +23,7 @@ pub enum Color {
     Cyan = 3,
     LightGrey = 7,
     LightCyan = 11,
-    White = 15
+    White = 15,
 }
 
 impl Copy for Color {}
